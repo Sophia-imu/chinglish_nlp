@@ -46,11 +46,15 @@ def tokenize(text):
 
 def load_w2v_corpus():
     raw = []
+    
+    # 1) 通用英文语料
     if os.path.exists(GENERAL_CORPUS):
         for line in safe_read_lines(GENERAL_CORPUS):
             line = line.strip()
             if line:
                 raw.append(line)
+    
+    # 2) words 语料 —— 加详细诊断
     if os.path.exists(WORDS_PATH):
         if WORDS_PATH.endswith(".txt"):
             for line in safe_read_lines(WORDS_PATH):
@@ -59,14 +63,28 @@ def load_w2v_corpus():
                     raw.append(line)
         else:
             df = safe_read_csv(WORDS_PATH)
+            # 👇 诊断输出
+            st.write("### 🔍 words.csv 诊断")
+            st.write(f"- 列名：{list(df.columns)}")
+            st.write(f"- 行数：{len(df)}")
+            st.write("- 前 3 行：")
+            st.dataframe(df.head(3))
+            st.write("- 第 2 行内容：", df.iloc[1].tolist() if len(df) > 1 else "无")
+            
             text_cols = [c for c in df.columns
                          if df[c].dtype == object
                          and c.lower() not in ("label", "id", "index")]
+            st.write(f"- 识别到的文本列：{text_cols}")
+            
+            count = 0
             for _, row in df.iterrows():
                 for c in text_cols:
                     v = str(row[c]).strip()
                     if v and v.lower() != "nan":
                         raw.append(v)
+                        count += 1
+            st.write(f"- 从 words.csv 收集到的句子数：{count}")
+
     # 去重
     seen = set()
     deduped = []
@@ -75,8 +93,16 @@ def load_w2v_corpus():
         if key not in seen:
             seen.add(key)
             deduped.append(s)
+    
     sentences = [tokenize(t) for t in deduped]
-    return [s for s in sentences if s]
+    sentences = [s for s in sentences if s]
+    
+    # 诊断：看 add 和 oil 是否进入了分词结果
+    st.write(f"- 总语料句子数：{len(sentences)}")
+    st.write(f"- 包含 add 的句子数：{sum(1 for s in sentences if 'add' in s)}")
+    st.write(f"- 包含 oil 的句子数：{sum(1 for s in sentences if 'oil' in s)}")
+    
+    return sentences
 
 
 # ==================== Tab 1: 词向量调参 ====================
