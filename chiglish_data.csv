@@ -1,0 +1,299 @@
+sentence,label
+I very like it,0
+I like it very much,1
+How to say?,0
+How do you say this in English?,1
+I think I can't,0
+I don't think I can,1
+I have something to do tomorrow,0
+I am tied up all day tomorrow,1
+My English is poor,0
+"I am not 100% fluent, but at least I am improving",1
+What time is it now?,0
+"What time is it, please?",1
+I don't dance well too,0
+I am not a very good dancer either,1
+Would you like to join our party?,0
+Would you like to come to our party?,1
+I have no experience,0
+I don't know much about that,1
+The price is very suitable for me,0
+The price is right,1
+What's your job?,0
+Are you working at the moment?,1
+I haven't English name,0
+I don't have an English name,1
+Of course!,0
+Sure.,1
+Welcome you to China,0
+Welcome to China,1
+Remember you forever,0
+Always remember you,1
+Wish you have a good day,0
+I wish you a good day,1
+Yellow hair,0
+Blond,1
+WC,0
+Restroom,1
+Way in,0
+Entrance,1
+Way out,0
+Exit,1
+So-so,0
+Average,1
+Delicious,0
+Tasty,1
+Try my best,0
+Try,1
+Famous,0
+Well-known,1
+How to spell?,0
+How do you spell that?,1
+Bye-bye,0
+See you later,1
+Noodles,0
+Pasta,1
+It is said,0
+I heard,1
+Till now,0
+Recently,1
+Peasant,0
+Farmer,1
+Give me a Marlboro,0
+"May I have a Marlboro, please?",1
+"Good good study, day day up",0
+Study hard and make progress every day,1
+People mountain people sea,0
+It's extremely crowded,1
+Long time no see,0
+I haven't seen you for a long time,1
+"You ask me, me ask who",0
+I have no idea either,1
+Heart flower angrily open,0
+Bursting with joy,1
+I tomorrow go to Shanghai,0
+I am going to Shanghai tomorrow,1
+He has always got a hard mouth,0
+He never says uncle,1
+The professor teaches badly,0
+The professor is so terrible,1
+He has affairs outside his own marriage,0
+He is leading a double life,1
+She is the pearl on her father's hand,0
+She is the apple of her father's eye,1
+I hope you won't pull my leg,0
+I hope you won't hold me back,1
+Don't lose your heart,0
+Don't lose heart,1
+So it is. I understand soon after your explanation,0
+So that's how it is. I understand now,1
+Bottom up,0
+Bottoms up,1
+Some prefer radish but others prefer cabbage,0
+Tastes differ,1
+He always comes here to have meals for free,0
+He always comes here to bum meals off me,1
+I am in the chicken,0
+I am in the kitchen,1
+I eat lamp yesterday,0
+I ate lamb yesterday,1
+I very like it.,0
+I like it very much.,1
+Welcome you to visit our school.,0
+Welcome to our school.,1
+My English is very poor.,0
+My English isn°Øt very good.,1
+He is very difficult.,0
+He is a difficult person.,1
+The price is very expensive.,0
+The price is very high. / The item is very expensive.,1
+I want to improve my English level.,0
+I want to improve my English.,1
+Open the light.,0
+Turn on the light.,1
+Close the light.,0
+Turn off the light.,1
+My stomach is very hungry.,0
+I°Øm very hungry.,1
+I very miss you.,0
+I miss you very much.,1
+We should learn more knowledge.,0
+We should gain more knowledge.,1
+Thank you for your help me.,0
+Thank you for helping me.,1
+He is my friend of childhood.,0
+He is my childhood friend.,1
+The traffic is very crowded.,0
+The traffic is heavy.,1
+I will go to sleep.,0
+I°Øm going to bed.,1
+I very agree with you.,0
+I quite agree with you.,1
+My computer has problem.,0
+There°Øs something wrong with my computer.,1
+I feel very painful.,0
+I°Øm in a lot of pain.,1
+I want to make friend with you.,0
+I°Ød like to make friends with you.,1
+This movie is very worth watching.,0
+This movie is well worth watching.,1
+Yesterday I very busy.,0
+I was very busy yesterday.,1
+I very tired.,0
+I°Øm very tired.,1
+He has many money.,0
+He has a lot of money.,1
+I have a dream that I can go abroad.,0
+I dream of going abroad.,1
+I will give you a surprise.,0
+I°Øve got a surprise for you.,1
+My mother is very love me.,0
+My mother loves me very much.,1
+I very afraid of dogs.,0
+I°Øm very afraid of dogs.,1
+"This book is very interesting, I like read it.",0
+This book is really interesting. I like reading it.,1
+"I will study hard, get good grades.",0
+I will study hard to get good grades.,1
+He is very good at play basketball.,0
+He is very good at playing basketball.,1
+I very enjoy the party.,0
+I really enjoyed the party.,1
+The bus is very crowded.,0
+The bus is packed.,1
+I want to know your opinion.,0
+I°Ød like to hear your opinion.,1
+"I have a fever, my body is very hot.",0
+I°Øve got a fever.,1
+It is very difficult to learn English.,0
+Learning English can be quite challenging.,1
+I hope you can happy every day.,0
+I hope you°Øre happy every day.,1
+I have a lot of pressure.,0
+I°Øm under a lot of pressure.,1
+We should take exercise every day.,0
+We should work out every day.,1
+I will wait you.,0
+I°Øll wait for you.,1
+My heart is very happy.,0
+I°Øm really happy.,1
+I very regret it.,0
+I really regret it.,1
+The food is very full.,0
+I°Øm full.,1
+I have no idea about it.,0
+I have no clue about it.,1
+I very like to travel.,0
+I love travelling.,1
+It makes me very excited.,0
+It gets me really excited.,1
+I want to learn more skills.,0
+I°Ød like to pick up more skills.,1
+"The exam is very difficult, I very nervous.",0
+"The exam is really tough, and I°Øm really nervous.",1
+I very appreciate your help.,0
+I really appreciate your help.,1
+I will go to home.,0
+I will go home.,1
+I very respect him.,0
+I have great respect for him.,1
+Increase people°Øs awareness of environmental protection.,0
+Raise public awareness of environmental protection.,1
+There are many people think that°≠,0
+Many people believe that°≠,1
+"Because the society develops quickly,°≠",0
+"With the rapid development of society,°≠",1
+Our life has taken place great changes.,0
+Great changes have taken place in our lives.,1
+I cost two hours to finish the task.,0
+It took me two hours to finish the task.,1
+The number of students becomes more and more.,0
+The number of students is growing.,1
+We should do our best to do it well.,0
+We should strive to get it right.,1
+No matter you like it or not°≠,0
+Whether you like it or not°≠,1
+"In my opinion, I think that°≠",0
+"In my opinion,°≠ / I think that°≠",1
+People°Øs living standard is improving.,0
+People°Øs standard of living is improving.,1
+We can get many benefits from it.,0
+We can reap many benefits from it.,1
+The reason is because he is busy.,0
+The reason is that he is busy.,1
+Although but he tried his best.,0
+"Although he tried his best,°≠",1
+I very satisfy with the result.,0
+I am very satisfied with the result.,1
+It is good for our body.,0
+It is good for our health.,1
+I join many activities in college.,0
+I take part in many activities in college.,1
+Make our city become more beautiful.,0
+Make our city more beautiful.,1
+I have no choice but to do it.,0
+I have little choice but to do it.,1
+He lacks of confidence.,0
+He lacks confidence.,1
+On one hand°≠ On other hand°≠,0
+On the one hand°≠ On the other hand°≠,1
+This phenomenon exists for a long time.,0
+This phenomenon has long existed.,1
+We should pay attention on this problem.,0
+We should pay attention to this problem.,1
+"Compare with the past,°≠",0
+"Compared with the past,°≠",1
+I very surprise at the news.,0
+I was greatly surprised by the news.,1
+The job can give me much experience.,0
+The job can give me valuable experience.,1
+More and more people like to use phone.,0
+An increasing number of people use mobile phones.,1
+It will have a bad influence to teenagers.,0
+It will exert a negative influence on teenagers.,1
+I suggest him to take a rest.,0
+I suggest (that) he take a rest.,1
+My dream is to become to a translator.,0
+My dream is to become a translator.,1
+We must face to these difficulties.,0
+We must face these difficulties.,1
+I spent much time to read novels.,0
+I spent much time reading novels.,1
+The price becomes cheaper.,0
+The price goes down.,1
+"As we all know that,°≠",0
+"As we all know,°≠",1
+There is no doubt that it is very important.,0
+"Undoubtedly, it plays a vital role.",1
+I very hope I can pass the exam.,0
+I sincerely hope that I can pass the exam.,1
+He makes me very angry.,0
+He makes me furious.£® È√Ê£©/ He really annoys me.,1
+Many things cause this problem.,0
+Multiple factors contribute to this problem.,1
+We should improve our quality.,0
+We should improve our personal qualities.,1
+I am not good at speak in public.,0
+I am not good at speaking in public.,1
+The problem is more and more serious.,0
+The problem is growing increasingly serious.,1
+"If you have time, please come to my home.",0
+"If you are free, please drop by my place.",1
+My mood is not good today.,0
+I°Øm in a bad mood today.,1
+It can help us to broaden our eyes.,0
+It can help us broaden our horizons.,1
+We need to take measures to solve the problem.,0
+We need to take steps to address the problem.,1
+He is easy to make mistakes.,0
+He tends to make mistakes.,1
+I very thank you for your support.,0
+I am deeply grateful for your support.,1
+The society needs more talented persons.,0
+Society needs more talented individuals.,1
+Don°Øt make noise in the library.,0
+Please keep quiet in the library.,1
+This book can increase my vocabulary.,0
+This book can expand my vocabulary.,1
+People think it is a bad thing.,0
+Many regard it as undesirable.,1
