@@ -4,4 +4,6 @@ pandas
 matplotlib
 scikit-learn
 gensim
-torch --index-url https://download.pytorch.org/whl/cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+rich==13.71
