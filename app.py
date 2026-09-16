@@ -160,7 +160,9 @@ def tab_word2vec():
     tokens = tokenize(query)
     valid_tokens = [t for t in tokens if t in model.wv]
 
-    if not valid_tokens:
+    if not query.strip():
+        st.warning("⚠️ 请输入词汇，不能为空！")
+    elif not valid_tokens:
         st.error(f"'{query}' 不在词表中。")
     else:
         key = valid_tokens[0]
@@ -293,7 +295,7 @@ def draw_cnn_visual(embed_matrix, tokens, results, ks_show):
         bars = ax.bar(range(len(pooled)), pooled, color="steelblue")
         for i, p in enumerate(pooled):
             ax.text(i, p, f"{p:.2f}", ha="center", va="bottom", fontsize=9)
-        ax.set_title(f"③ Max Pooling 结果 (kernel={ks_show})")
+        ax.set_title(f"③ Max Pooling Reault (kernel={ks_show})")
         ax.set_xticks(range(len(pooled)))
         ax.set_xticklabels([f"filter{i+1}" for i in range(len(pooled))])
         ax.set_ylabel("Max Activation")
@@ -324,7 +326,7 @@ def draw_conv_sliding_anim(embed_matrix, tokens, kernel_size):
                          linewidth=2.5, edgecolor="red", facecolor="none")
         ax.add_patch(rect)
         cover = tokens[i:i + kernel_size]
-        ax.set_title(f"位置 {i}: [{' '.join(cover)}]", fontsize=10)
+        ax.set_title(f"Pos {i}: [{' '.join(cover)}]", fontsize=10)
         ax.set_yticks(range(seq_len))
         ax.set_yticklabels(tokens, fontsize=8)
         ax.set_xticks([])
@@ -369,9 +371,29 @@ def tab_cnn():
     st.success(f"分类器就绪 | 数据 {len(texts)} 条 | 类别 {unique}")
 
     sentence = st.text_input("输入一句英文：", "I very like this book")
-    if st.button("🔮 预测",key="tab2_predict"):
+    if st.button("🔮 预测", key="tab2_predict"):
+    if not sentence.strip():
+        st.warning("⚠️ 请输入句子，不能为空！")
+    else:
         X = vec.transform([sentence])
         probs = clf.predict_proba(X)[0]
+
+        chinglish_idx = 1
+        for i, c in enumerate(unique):
+            cs = str(c).lower()
+            if "chinglish" in cs or "中式" in cs or cs in ("1", "yes", "true"):
+                chinglish_idx = i
+                break
+        native_idx = 1 - chinglish_idx
+
+        st.subheader("预测结果")
+        st.write("**中式英语** 概率")
+        st.progress(float(probs[chinglish_idx]))
+        st.write(f"{probs[chinglish_idx] * 100:.2f}%")
+
+        st.write("**地道英语** 概率")
+        st.progress(float(probs[native_idx]))
+        st.write(f"{probs[native_idx] * 100:.2f}%")
         chinglish_idx = 1
         for i, c in enumerate(unique):
             cs = str(c).lower()
@@ -485,7 +507,10 @@ def tab_compare():
     model_name = st.selectbox("选择模型", ["朴素贝叶斯", "SVM", "MLP（替代TextCNN）"])
     sentence = st.text_input("输入英文句子", "I very like this food")
 
-    if st.button("🔮 预测",key="tab3_predict"):
+    if st.button("🔮 预测", key="tab3_predict"):
+    if not sentence.strip():
+        st.warning("⚠️ 请输入句子，不能为空！")
+    else:
         X = vec.transform([sentence])
         if model_name == "朴素贝叶斯":
             probs = nb.predict_proba(X)[0]
@@ -493,6 +518,15 @@ def tab_compare():
             probs = svm.predict_proba(X)[0]
         else:
             probs = mlp.predict_proba(X)[0]
+
+        pred = int(np.argmax(probs))
+        label_name = {0: str(unique[0]), 1: str(unique[1])}
+        st.success(f"【{model_name}】预测：**{label_name[pred]}** 置信度：**{probs[pred] * 100:.2f}%**")
+
+        st.write("各类别概率：")
+        for i, u in enumerate(unique):
+            st.write(f"- {u}: {probs[i] * 100:.2f}%")
+            st.progress(float(probs[i]))
 
         pred = int(np.argmax(probs))
         conf = float(probs[pred])
@@ -503,23 +537,26 @@ def tab_compare():
             st.write(f"- {u}: {probs[i] * 100:.2f}%")
             st.progress(float(probs[i]))
 
-    st.markdown("---")
+        st.markdown("---")
     st.subheader("📊 三模型批量对比")
-    if st.button("对当前句子跑三个模型"):
-        X = vec.transform([sentence])
-        all_probs = {
-            "朴素贝叶斯": nb.predict_proba(X)[0],
-            "SVM": svm.predict_proba(X)[0],
-            "MLP": mlp.predict_proba(X)[0],
-        }
-        rows = []
-        for name, p in all_probs.items():
-            rows.append({
-                "模型": name,
-                "预测": str(unique[int(np.argmax(p))]),
-                "置信度": f"{float(p.max()) * 100:.2f}%",
-            })
-        st.dataframe(pd.DataFrame(rows), use_container_width=True)
+
+    if st.button("对当前句子跑三个模型", key="tab3_batch"):
+        tokens = tokenize(sentence)
+        if not sentence.strip():
+            st.warning("⚠️ 请输入句子，不能为空！")
+        elif len([t for t in tokens if t.isalpha()]) == 0:
+            st.warning("⚠️ 输入里没有有效英文单词，请重新输入！")
+        else:
+            X = vec.transform([sentence])
+            rows = []
+            for name, clf in [("朴素贝叶斯", nb), ("SVM", svm), ("MLP", mlp)]:
+                p = clf.predict_proba(X)[0]
+                rows.append({
+                    "模型": name,
+                    "预测": str(unique[int(np.argmax(p))]),
+                    "置信度": f"{float(p.max()) * 100:.2f}%",
+                })
+            st.dataframe(pd.DataFrame(rows), use_container_width=True)
 
 
 # ==================== 主入口 ====================
