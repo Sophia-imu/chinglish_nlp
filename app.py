@@ -46,15 +46,13 @@ def tokenize(text):
 
 def load_w2v_corpus():
     raw = []
-    
-    # 1) 通用英文语料
+
     if os.path.exists(GENERAL_CORPUS):
         for line in safe_read_lines(GENERAL_CORPUS):
             line = line.strip()
             if line:
                 raw.append(line)
-    
-    # 2) words 语料 —— 加详细诊断
+
     if os.path.exists(WORDS_PATH):
         if WORDS_PATH.endswith(".txt"):
             for line in safe_read_lines(WORDS_PATH):
@@ -63,27 +61,13 @@ def load_w2v_corpus():
                     raw.append(line)
         else:
             df = safe_read_csv(WORDS_PATH)
-            # 👇 诊断输出
-            st.write("### 🔍 words.csv 诊断")
-            st.write(f"- 列名：{list(df.columns)}")
-            st.write(f"- 行数：{len(df)}")
-            st.write("- 前 3 行：")
-            st.dataframe(df.head(3))
-            st.write("- 第 2 行内容：", df.iloc[1].tolist() if len(df) > 1 else "无")
-            
-            text_cols = list(df.columns)
-            st.write(f"- 识别到的文本列：{text_cols}")
-            
-            count = 0
+            text_cols = list(df.columns)     # 👈 这行保留
             for _, row in df.iterrows():
                 for c in text_cols:
                     v = str(row[c]).strip()
                     if v and v.lower() != "nan":
                         raw.append(v)
-                        count += 1
-            st.write(f"- 从 words.csv 收集到的句子数：{count}")
 
-    # 去重
     seen = set()
     deduped = []
     for s in raw:
@@ -91,16 +75,9 @@ def load_w2v_corpus():
         if key not in seen:
             seen.add(key)
             deduped.append(s)
-    
+
     sentences = [tokenize(t) for t in deduped]
-    sentences = [s for s in sentences if s]
-    
-    # 诊断：看 add 和 oil 是否进入了分词结果
-    st.write(f"- 总语料句子数：{len(sentences)}")
-    st.write(f"- 包含 add 的句子数：{sum(1 for s in sentences if 'add' in s)}")
-    st.write(f"- 包含 oil 的句子数：{sum(1 for s in sentences if 'oil' in s)}")
-    
-    return sentences
+    return [s for s in sentences if s]
 
 
 # ==================== Tab 1: 词向量调参 ====================
@@ -210,12 +187,12 @@ def tab_word2vec():
         pca = PCA(n_components=2, random_state=SEED)
         coords = pca.fit_transform(vectors)
         fig, ax = plt.subplots(figsize=(8, 6))
-        ax.scatter(coords[1:, 0], coords[1:, 1], c="steelblue", s=80, label="相似词")
-        ax.scatter(coords[0, 0], coords[0, 1], c="crimson", s=150, marker="*", label=f"查询:{key}")
+        ax.scatter(coords[1:, 0], coords[1:, 1], c="steelblue", s=80, label="Similar Words")
+        ax.scatter(coords[0, 0], coords[0, 1], c="crimson", s=150, marker="*", label=f"Query:{key}")
         for i, w in enumerate(words):
             ax.annotate(w, (coords[i, 0], coords[i, 1]), fontsize=9,
                         xytext=(4, 4), textcoords="offset points")
-        ax.set_title(f"PCA 2D 投影 Top-{topn}")
+        ax.set_title(f"PCA 2D Projection Top-{topn}")
         ax.legend()
         ax.grid(alpha=0.3)
         st.pyplot(fig)
@@ -223,9 +200,9 @@ def tab_word2vec():
     st.markdown("---")
     st.subheader("🔢 词类比计算 a - b + c = ?")
     c1, c2, c3 = st.columns(3)
-    a = c1.text_input("a", "good")
-    b = c2.text_input("b", "study")
-    c = c3.text_input("c", "diligent")
+    a = c1.text_input("a", "add")
+    b = c2.text_input("b", "oil")
+    c = c3.text_input("c", "study")
     if st.button("计算类比"):
         try:
             result = model.wv.most_similar(positive=[a, c], negative=[b], topn=5)
@@ -290,10 +267,10 @@ def draw_cnn_visual(embed_matrix, tokens, results, ks_show):
     # ① 词向量矩阵
     ax = axes[0]
     im = ax.imshow(embed_matrix, aspect="auto", cmap="viridis")
-    ax.set_title(f"① 词向量矩阵 ({seq_len}×{embed_dim})")
+    ax.set_title(f"① Embedding Matrix ({seq_len}×{embed_dim})")
     ax.set_yticks(range(seq_len))
     ax.set_yticklabels(tokens, fontsize=9)
-    ax.set_xlabel("向量维度")
+    ax.set_xlabel("Embedding Dimension")
     plt.colorbar(im, ax=ax, fraction=0.04)
 
     # ② 卷积核滑动激活值
@@ -301,12 +278,12 @@ def draw_cnn_visual(embed_matrix, tokens, results, ks_show):
     if ks_show in results:
         conv = results[ks_show]["conv_outs"]
         im = ax.imshow(conv, aspect="auto", cmap="coolwarm")
-        ax.set_title(f"② 卷积核滑动激活值 (kernel={ks_show})")
+        ax.set_title(f"② Conv Activation (kernel={ks_show})")
         ax.set_xticks(range(conv.shape[1]))
         ax.set_xticklabels([f"p{i}" for i in range(conv.shape[1])], rotation=45, fontsize=8)
         ax.set_yticks(range(conv.shape[0]))
         ax.set_yticklabels([f"filter{i+1}" for i in range(conv.shape[0])])
-        ax.set_xlabel("滑动位置")
+        ax.set_xlabel("Sliding Position")
         plt.colorbar(im, ax=ax, fraction=0.04)
 
     # ③ Max Pooling 结果
@@ -319,7 +296,7 @@ def draw_cnn_visual(embed_matrix, tokens, results, ks_show):
         ax.set_title(f"③ Max Pooling 结果 (kernel={ks_show})")
         ax.set_xticks(range(len(pooled)))
         ax.set_xticklabels([f"filter{i+1}" for i in range(len(pooled))])
-        ax.set_ylabel("最大激活值")
+        ax.set_ylabel("Max Activation")
         ax.grid(axis="y", alpha=0.3)
 
     plt.tight_layout()
@@ -332,7 +309,7 @@ def draw_conv_sliding_anim(embed_matrix, tokens, kernel_size):
     positions = seq_len - kernel_size + 1
     if positions <= 0:
         fig, ax = plt.subplots(figsize=(6, 3))
-        ax.text(0.5, 0.5, "句子太短", ha="center")
+        ax.text(0.5, 0.5, "Sentence too short", ha="center")
         return fig
 
     n_cols = min(positions, 4)
