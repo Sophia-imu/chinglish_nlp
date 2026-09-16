@@ -115,7 +115,7 @@ def tab_word2vec():
             window = st.slider("窗口大小 window", 2, 10, 8)
         with c2:
             min_count = st.slider("最低词频 min_count", 1, 5, 1)
-            epochs = st.slider("训练轮数 epochs", 10, 200, 100, 10)
+            epochs = st.slider("训练轮数 epochs", 10, 200, 110, 10)
         sg_choice = st.radio("训练算法", ["Skip-Gram (sg=1)", "CBOW (sg=0)"], index=0, horizontal=True)
         sg_val = 1 if sg_choice.startswith("Skip") else 0
 
