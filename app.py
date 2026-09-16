@@ -508,9 +508,9 @@ def tab_compare():
     sentence = st.text_input("输入英文句子", "I very like this food")
 
     if st.button("🔮 预测", key="tab3_predict"):
-    if not sentence.strip():
+      if not sentence.strip():
         st.warning("⚠️ 请输入句子，不能为空！")
-    else:
+      else:
         X = vec.transform([sentence])
         if model_name == "朴素贝叶斯":
             probs = nb.predict_proba(X)[0]
