@@ -71,9 +71,7 @@ def load_w2v_corpus():
             st.dataframe(df.head(3))
             st.write("- 第 2 行内容：", df.iloc[1].tolist() if len(df) > 1 else "无")
             
-            text_cols = [c for c in df.columns
-                         if df[c].dtype == object
-                         and c.lower() not in ("label", "id", "index")]
+            text_cols = list(df.columns)
             st.write(f"- 识别到的文本列：{text_cols}")
             
             count = 0
