@@ -372,9 +372,9 @@ def tab_cnn():
 
     sentence = st.text_input("输入一句英文：", "I very like this book")
     if st.button("🔮 预测", key="tab2_predict"):
-    if not sentence.strip():
+      if not sentence.strip():
         st.warning("⚠️ 请输入句子，不能为空！")
-    else:
+      else:
         X = vec.transform([sentence])
         probs = clf.predict_proba(X)[0]
 
