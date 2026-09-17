@@ -295,7 +295,7 @@ def draw_cnn_visual(embed_matrix, tokens, results, ks_show):
         bars = ax.bar(range(len(pooled)), pooled, color="steelblue")
         for i, p in enumerate(pooled):
             ax.text(i, p, f"{p:.2f}", ha="center", va="bottom", fontsize=9)
-        ax.set_title(f"③ Max Pooling Reault (kernel={ks_show})")
+        ax.set_title(f"③ Max Pooling Result (kernel={ks_show})")
         ax.set_xticks(range(len(pooled)))
         ax.set_xticklabels([f"filter{i+1}" for i in range(len(pooled))])
         ax.set_ylabel("Max Activation")
