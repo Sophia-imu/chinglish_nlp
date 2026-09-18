@@ -394,20 +394,7 @@ def tab_cnn():
         st.write("**地道英语** 概率")
         st.progress(float(probs[native_idx]))
         st.write(f"{probs[native_idx] * 100:.2f}%")
-        chinglish_idx = 1
-        for i, c in enumerate(unique):
-            cs = str(c).lower()
-            if "chinglish" in cs or "中式" in cs or cs in ("1", "yes", "true"):
-                chinglish_idx = i
-                break
-        native_idx = 1 - chinglish_idx
-        st.subheader("预测结果")
-        st.write("**中式英语** 概率")
-        st.progress(float(probs[chinglish_idx]))
-        st.write(f"{probs[chinglish_idx] * 100:.2f}%")
-        st.write("**地道英语** 概率")
-        st.progress(float(probs[native_idx]))
-        st.write(f"{probs[native_idx] * 100:.2f}%")
+       
 
     st.markdown("---")
     st.subheader("🧠 TextCNN 内部计算流程可视化")
