@@ -202,9 +202,9 @@ def tab_word2vec():
     st.markdown("---")
     st.subheader("🔢 词类比计算 a - b + c = ?")
     c1, c2, c3 = st.columns(3)
-    a = c1.text_input("a", "add")
-    b = c2.text_input("b", "oil")
-    c = c3.text_input("c", "study")
+    a = c1.text_input("a", "king")
+    b = c2.text_input("b", "man")
+    c = c3.text_input("c", "woman")
     if st.button("计算类比"):
         try:
             result = model.wv.most_similar(positive=[a, c], negative=[b], topn=5)
