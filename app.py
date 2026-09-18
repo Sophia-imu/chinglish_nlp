@@ -515,15 +515,7 @@ def tab_compare():
             st.write(f"- {u}: {probs[i] * 100:.2f}%")
             st.progress(float(probs[i]))
 
-        pred = int(np.argmax(probs))
-        conf = float(probs[pred])
-        label_name = {0: str(unique[0]), 1: str(unique[1])}
-        st.success(f"【{model_name}】预测：**{label_name[pred]}** 置信度：**{conf * 100:.2f}%**")
-        st.write("各类别概率：")
-        for i, u in enumerate(unique):
-            st.write(f"- {u}: {probs[i] * 100:.2f}%")
-            st.progress(float(probs[i]))
-
+       
         st.markdown("---")
     st.subheader("📊 三模型批量对比")
 
